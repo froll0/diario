@@ -46,13 +46,10 @@ export default class {
     update (id, args) {
         if (id !== null && (typeof args === 'object' && args !== null)) {
             this.connection.get(id).then(function (doc) {
-                return db.put({
-                    _id: id,
-                    _rev: doc._rev,
-                    title: args.title,
-                    content: args.content,
-                    date: args.date
-                });
+                args.id = id;
+                args._rev = doc._rev;
+
+                return db.put(args);
             }).then(function (response) {
                 if (response.ok === true) {
                     return {
@@ -84,10 +81,6 @@ export default class {
         } else {
             console.log(this.error.invalidInput);
         }
-    }
-
-    fetchBy (args) {
-        // ???
     }
 
     /**
