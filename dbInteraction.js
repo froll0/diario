@@ -9,9 +9,10 @@ export default class {
     constructor () {
         this.connection = new PouchDB('diario');
 
+        this.dictionary = new dictionary();
         this.error = {
-            generic: dictionary.error,
-            invalidInput: this.error.generic + dictionary.invalidInput
+            generic: dictionary.currLang.error,
+            invalidInput: this.error.generic + dictionary.currLang.invalidInput
         };
     }
 
